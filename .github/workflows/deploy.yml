@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -27,6 +27,26 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Apache (Hostinger) config: serve index.html for any unknown path
+      - name: Add .htaccess for Hostinger
+        run: |
+          cat > dist/.htaccess <<'EOF'
+          Options -MultiViews
+          RewriteEngine On
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^ index.html [QSA,L]
+          EOF
+      # Publish the built site to the "hostinger" branch.
+      # In Hostinger hPanel -> Git, deploy from the "hostinger" branch (not main).
+      - name: Publish build to hostinger branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: hostinger
+          publish_dir: ./dist
+          force_orphan: true
+          commit_message: "Build from"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
