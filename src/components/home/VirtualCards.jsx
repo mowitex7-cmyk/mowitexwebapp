@@ -1,0 +1,48 @@
+import { motion } from "motion/react";
+import virtualDebitCardsImg from "../../assets/c66efb50a6bb6953adc803d7a98033e819256344.png";
+export const VirtualCards = () => (
+  <section className="py-20 bg-slate-50 dark:bg-[#0B1120]">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-gray-100 dark:bg-[#131b2e] rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 md:gap-20 overflow-hidden"
+      >
+        <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, x: -20 }}
+            whileInView={{ opacity: 1, scale: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <img
+              src={virtualDebitCardsImg}
+              alt="Virtual Debit Cards"
+              className="w-full max-w-sm h-auto object-contain drop-shadow-2xl"
+            />
+          </motion.div>
+        </div>
+        <div className="w-full md:w-1/2 text-center md:text-left">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#0B1120] dark:text-white mb-6">
+            Virtual debit cards
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed max-w-lg mx-auto md:mx-0">
+            African banks often slap you with high hidden foreign exchange
+            fees—sometimes up to 10-15% or more—when you use your local-currency
+            card for online international payments. These come from poor
+            exchange rates, markups, cross-border charges, and other sneaky
+            costs that eat into your money. Switch to Mowitex USD virtual cards
+            and save up to 13% (or even more in many cases) on those
+            transactions. Get no limit USD spending power without the usual bank
+            rip-offs—perfect for online shopping, subscriptions, and global
+            payments from Africa. Pay smarter. Keep more of your money. Try
+            Mowitex today!
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
